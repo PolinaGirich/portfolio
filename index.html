@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Гирич Полина — Педагогический дизайнер</title>
-  <meta name="description" content="Портфолио педагогического дизайнера: проектирование программ ДПО, дифференциация, оценочные средства, аналитика обучения." />
+  <meta name="description" content="Портфолио педагогического дизайнера Полины Гирич: проектирование программ ДПО, дифференциация, оценочные средства, аналитика обучения." />
   <style>
     :root {
-      --primary: #1e293b;          /* графит */
-      --accent: #e11d48;           /* розовый основной */
-      --accent-soft: #ffe4e6;      /* мягкий розовый фон */
-      --bright: #f43f5e;           /* яркий акцент */
+      --primary: #1e293b;
+      --accent: #e11d48;
+      --accent-soft: #ffe4e6;
+      --bright: #f43f5e;
       --muted: #64748b;
       --bg: #faf7f8;
       --card: #ffffff;
@@ -43,7 +43,14 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .container { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+    /* Progress bar */
+    #progressBar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--bright));
+      z-index: 100; transition: width 0.05s linear;
+    }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 32px 20px 40px; }
 
     /* Nav */
     nav {
@@ -62,7 +69,10 @@
       padding: 6px 12px; border-radius: 8px; text-decoration: none;
       transition: color 0.2s, background 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); background: var(--accent-soft); }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent); background: var(--accent-soft);
+    }
     .theme-btn {
       background: var(--card); border: 1px solid var(--line);
       color: var(--primary); width: 36px; height: 36px; border-radius: 10px;
@@ -76,9 +86,52 @@
       background: var(--card); border-radius: var(--radius);
       padding: 36px 32px; margin-bottom: 24px;
       box-shadow: var(--shadow); border-top: 4px solid var(--accent);
+      position: relative; overflow: visible;
     }
-    h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 4px; }
-    .role { color: var(--accent); font-weight: 600; font-size: 16px; margin-bottom: 6px; }
+    .name-wrap {
+      position: relative; display: inline-block;
+      cursor: default; margin-bottom: 4px;
+    }
+    .name-wrap .letter {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .name-wrap:hover .letter {
+      transition: transform 0.3s ease;
+    }
+    .float-tags {
+      position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 5;
+    }
+    .float-tag {
+      position: absolute; font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 12px;
+      background: var(--accent); color: #fff;
+      opacity: 0; transform: scale(0.6);
+      transition: opacity 0.3s, transform 0.3s;
+      white-space: nowrap;
+      animation: none;
+    }
+    .name-wrap:hover .float-tag {
+      opacity: 1; transform: scale(1);
+      animation: floatY 2.2s ease-in-out infinite;
+    }
+    .float-tag:nth-child(1) { top: -28px; left: 5%; transition-delay: 0.05s; animation-delay: 0s; }
+    .float-tag:nth-child(2) { top: -32px; left: 28%; transition-delay: 0.1s; animation-delay: 0.15s; }
+    .float-tag:nth-child(3) { top: -26px; left: 52%; transition-delay: 0.15s; animation-delay: 0.3s; }
+    .float-tag:nth-child(4) { top: -30px; left: 75%; transition-delay: 0.2s; animation-delay: 0.1s; }
+    .float-tag:nth-child(5) { bottom: -26px; left: 10%; transition-delay: 0.12s; animation-delay: 0.25s; }
+    .float-tag:nth-child(6) { bottom: -28px; left: 40%; transition-delay: 0.18s; animation-delay: 0.05s; }
+    .float-tag:nth-child(7) { bottom: -24px; left: 68%; transition-delay: 0.22s; animation-delay: 0.2s; }
+    .float-tag:nth-child(8) { top: 50%; right: -70px; transition-delay: 0.25s; animation-delay: 0.12s; }
+
+    @keyframes floatY {
+      0%, 100% { transform: scale(1) translateY(0); }
+      50% { transform: scale(1) translateY(-6px); }
+    }
+
+    h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 0; }
+    .role { color: var(--accent); font-weight: 600; font-size: 16px; margin: 8px 0 6px; }
     .sub-role { color: var(--muted); font-size: 13.5px; margin-bottom: 16px; }
     .contacts {
       color: var(--muted); font-size: 13.5px;
@@ -87,11 +140,12 @@
     .contacts a { color: var(--muted); }
     .contacts a:hover { color: var(--accent); }
 
-    /* Sections + reveal */
+    /* Sections */
     section {
       background: var(--card); border-radius: var(--radius);
       padding: 28px 32px; margin-bottom: 18px;
       box-shadow: var(--shadow);
+      scroll-margin-top: 64px;
       opacity: 1; transform: translateY(0);
       transition: opacity 0.55s ease, transform 0.55s ease, background 0.3s;
     }
@@ -117,14 +171,14 @@
       font-size: 14px; border-left: 3px solid var(--accent);
     }
 
-    /* Skills with hover */
+    /* Skills */
     .skills { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
       position: relative;
       background: var(--accent-soft); color: var(--accent);
       padding: 6px 14px; border-radius: 20px;
       font-size: 12.5px; font-weight: 550;
-      cursor: default; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      cursor: default; transition: transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
     }
     .tag:hover {
       transform: translateY(-3px);
@@ -147,56 +201,50 @@
     }
     .tag:hover .tip { display: block; }
 
-    /* Cases accordion */
+    /* Cases — compact */
     .case {
       border: 1px solid var(--line); border-radius: 14px;
-      margin-bottom: 14px; overflow: hidden;
+      margin-bottom: 12px; overflow: hidden;
       transition: box-shadow 0.2s, border-color 0.2s;
     }
     .case:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
     .case-header {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 20px; cursor: pointer; gap: 12px; user-select: none;
+      padding: 14px 18px; cursor: pointer; gap: 12px; user-select: none;
     }
-    .case-header h3 { margin: 0; font-size: 15.5px; flex: 1; }
+    .case-header h3 { margin: 0; font-size: 14.5px; flex: 1; line-height: 1.35; }
     .case-toggle {
-      width: 28px; height: 28px; border-radius: 8px;
+      width: 26px; height: 26px; border-radius: 8px;
       background: var(--accent-soft); color: var(--accent);
-      display: grid; place-items: center; font-size: 18px;
-      flex-shrink: 0; transition: transform 0.25s, background 0.2s;
+      display: grid; place-items: center; font-size: 16px;
+      flex-shrink: 0; transition: transform 0.25s, background 0.2s, color 0.2s;
     }
     .case.open .case-toggle { transform: rotate(45deg); background: var(--accent); color: #fff; }
     .case-body {
       max-height: 0; overflow: hidden;
       transition: max-height 0.35s ease, padding 0.25s;
-      padding: 0 20px;
+      padding: 0 18px;
     }
-    .case.open .case-body { max-height: 2200px; padding: 0 20px 20px; }
+    .case.open .case-body { max-height: 2400px; padding: 0 18px 16px; }
     .case-tags {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      margin: 4px 0 8px;
+      display: flex; flex-wrap: wrap; gap: 5px;
+      margin: 0 0 10px;
     }
     .case-tags span {
-      font-size: 11px; font-weight: 500;
-      padding: 3px 10px; border-radius: 12px;
+      font-size: 10.5px; font-weight: 500;
+      padding: 2px 8px; border-radius: 10px;
       background: var(--accent-soft); color: var(--accent);
     }
     .label {
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.9px; color: var(--accent); margin: 14px 0 4px;
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; color: var(--accent); margin: 10px 0 3px;
     }
-    .case-body p { font-size: 14px; }
-    .metrics {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 10px; margin: 12px 0;
+    .case-body p { font-size: 13.5px; margin-bottom: 6px; line-height: 1.5; }
+    .case-grid {
+      display: grid; gap: 2px 0;
     }
-    .metric {
-      background: var(--bg); border-radius: 10px; padding: 12px 14px; text-align: center;
-    }
-    .metric strong { display: block; font-size: 18px; color: var(--accent); font-weight: 700; }
-    .metric span { font-size: 12px; color: var(--muted); }
 
-    /* Materials list (no links) */
+    /* Materials */
     .materials-list {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 8px; margin-top: 8px;
@@ -213,37 +261,112 @@
     .edu-item { margin-bottom: 14px; }
     .edu-item:last-child { margin-bottom: 0; }
 
-    footer {
+    /* Footer CTA */
+    .footer-cta {
+      background: var(--card); border-radius: var(--radius);
+      padding: 36px 32px; margin-top: 8px; margin-bottom: 18px;
+      box-shadow: var(--shadow); text-align: center;
+      border-top: 4px solid var(--accent);
+    }
+    .footer-cta h2 {
+      font-size: 20px; text-transform: none; letter-spacing: -0.2px;
+      color: var(--primary); margin-bottom: 8px; font-weight: 700;
+    }
+    .footer-cta .sub {
+      color: var(--muted); font-size: 14px; margin-bottom: 20px;
+    }
+    .footer-btns {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .footer-btns a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 18px; border-radius: 12px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .footer-btns a:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn-tg {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
+    }
+    .btn-tg:hover { background: var(--bright); color: #fff; }
+    .btn-mail {
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .btn-pdf {
+      background: var(--bg); color: var(--primary); border: 1px solid var(--line);
+    }
+    .footer-contacts {
+      font-size: 13px; color: var(--muted);
+      display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center;
+    }
+    .footer-contacts a { color: var(--muted); }
+    .footer-contacts a:hover { color: var(--accent); }
+
+    footer.site-footer {
       text-align: center; color: var(--muted); font-size: 12.5px;
-      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+      padding: 8px 0 24px;
     }
 
+    /* Back to top */
+    #toTop {
+      position: fixed; right: 20px; bottom: 24px;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--accent); color: #fff; border: none;
+      font-size: 20px; cursor: pointer; z-index: 60;
+      opacity: 0; pointer-events: none; transform: translateY(10px);
+      transition: opacity 0.25s, transform 0.25s, background 0.2s;
+      box-shadow: 0 4px 16px rgba(225, 29, 72, 0.3);
+    }
+    #toTop.show {
+      opacity: 1; pointer-events: auto; transform: translateY(0);
+    }
+    #toTop:hover { background: var(--bright); }
+
     @media (max-width: 600px) {
-      .container { padding: 16px 12px 60px; }
-      header, section { padding: 22px 18px; }
+      .container { padding: 16px 12px 40px; }
+      header, section, .footer-cta { padding: 22px 18px; }
       h1 { font-size: 22px; }
       nav { margin: -16px -12px 20px; }
-      .metrics { grid-template-columns: 1fr 1fr; }
-      .tag .tip { max-width: 160px; }
+      .float-tag:nth-child(n+5) { display: none; }
+      .float-tag { font-size: 10px; padding: 3px 8px; }
+      .case-header h3 { font-size: 13.5px; }
+      .footer-btns { flex-direction: column; align-items: stretch; }
+      .footer-btns a { justify-content: center; }
     }
   </style>
 </head>
 <body>
+  <div id="progressBar"></div>
+  <button id="toTop" title="Наверх" aria-label="Наверх">↑</button>
+
   <div class="container">
     <nav>
       <div class="nav-links">
-        <a href="#about">Обо мне</a>
-        <a href="#experience">Опыт</a>
-        <a href="#cases">Кейсы</a>
-        <a href="#materials">Материалы</a>
-        <a href="#skills">Навыки</a>
-        <a href="#education">Образование</a>
+        <a href="#about" data-section="about">Обо мне</a>
+        <a href="#experience" data-section="experience">Опыт</a>
+        <a href="#cases" data-section="cases">Кейсы</a>
+        <a href="#materials" data-section="materials">Материалы</a>
+        <a href="#skills" data-section="skills">Навыки</a>
+        <a href="#education" data-section="education">Образование</a>
       </div>
       <button class="theme-btn" id="themeToggle" title="Тема">🌙</button>
     </nav>
 
-    <header>
-      <h1>Гирич Полина Ивановна</h1>
+    <header id="top">
+      <div class="name-wrap" id="nameWrap">
+        <h1 id="nameTitle" aria-label="Гирич Полина Ивановна"></h1>
+        <div class="float-tags" aria-hidden="true">
+          <span class="float-tag">ADDIE</span>
+          <span class="float-tag">iSpring</span>
+          <span class="float-tag">Miro</span>
+          <span class="float-tag">Блум</span>
+          <span class="float-tag">ДПО</span>
+          <span class="float-tag">ИИ</span>
+          <span class="float-tag">Дифференциация</span>
+          <span class="float-tag">CJM</span>
+        </div>
+      </div>
       <div class="role">Педагогический дизайнер / Instructional Designer</div>
       <div class="sub-role">Также: Методист образовательных программ · Learning Experience Designer</div>
       <div class="contacts">
@@ -314,7 +437,7 @@
 
     <section id="cases">
       <h2>Кейсы</h2>
-      <p style="font-size:13.5px; color:var(--muted); margin-bottom:16px;">Нажмите на кейс, чтобы раскрыть детали.</p>
+      <p style="font-size:13.5px; color:var(--muted); margin-bottom:14px;">Нажмите на кейс, чтобы раскрыть детали.</p>
 
       <div class="case open" id="case1">
         <div class="case-header" onclick="toggleCase('case1')">
@@ -323,10 +446,8 @@
         </div>
         <div class="case-body">
           <div class="case-tags">
-            <span>Обучение через вызов</span>
-            <span>Таксономия Блума</span>
-            <span>Дифференцированное обучение</span>
-            <span>Геймификация</span>
+            <span>Обучение через вызов</span><span>Таксономия Блума</span>
+            <span>Дифференцированное обучение</span><span>Геймификация</span>
           </div>
           <div class="label">Контекст</div>
           <p>Разработка 72-часовой программы ДПО для разнородной аудитории: инженеры и научные сотрудники с разным бэкграундом (от базового понимания данных до продвинутого уровня).</p>
@@ -335,11 +456,11 @@
           <div class="label">Решение</div>
           <p>• <strong>Архитектура на основе CBL и таксономии Блума:</strong> разбила программу на логические блоки с нарастающей сложностью — от формулировки профессионального вызова (уровни «понять/применить») до разработки прототипа и его прикладной адаптации (уровни «проанализировать/создать»).</p>
           <p>• <strong>Дифференциация:</strong> разделила практический модуль на 2 трека в зависимости от типа данных:</p>
-          <p style="padding-left:12px;">— Технический трек: работа с сенсорными данными, временными рядами, предиктивным обслуживанием<br/>
-          — Исследовательский трек: работа с табличными, текстовыми и экспериментальными данными</p>
-          <p>• <strong>Смешанный формат и оценка:</strong> синхронные онлайн-вебинары с экспертами + асинхронная работа в LMS; прозрачная балльно-рейтинговая система с укрупнёнными проектными заданиями; элементы геймификации (бейджи за ключевые этапы, сквозной нарратив).</p>
+          <p style="padding-left:12px;">— Технический трек: сенсорные данные, временные ряды, предиктивное обслуживание<br/>
+          — Исследовательский трек: табличные, текстовые и экспериментальные данные</p>
+          <p>• <strong>Смешанный формат и оценка:</strong> синхронные вебинары + асинхронная работа в LMS; балльно-рейтинговая система с укрупнёнными проектными заданиями; геймификация (бейджи, сквозной нарратив).</p>
           <div class="label">Результат</div>
-          <p>Участники решают реальные задачи из своей практики, а не абстрактные примеры. Разделение на треки позволило избежать когнитивной перегрузки и дало релевантный инструментарий как инженерам, так и исследователям, обеспечивая параллельную работу без взаимного замедления.</p>
+          <p>Участники решают реальные задачи из своей практики. Разделение на треки снизило когнитивную перегрузку и дало релевантный инструментарий инженерам и исследователям без взаимного замедления.</p>
         </div>
       </div>
 
@@ -350,22 +471,20 @@
         </div>
         <div class="case-body">
           <div class="case-tags">
-            <span>Проектирование на основе данных</span>
-            <span>Управление когнитивной нагрузкой</span>
-            <span>Скаффолдинг</span>
-            <span>Входная диагностика компетенций</span>
+            <span>Проектирование на основе данных</span><span>Управление когнитивной нагрузкой</span>
+            <span>Скаффолдинг</span><span>Входная диагностика компетенций</span>
           </div>
           <div class="label">Контекст</div>
-          <p>По итогам анализа пилотного потока 72-часовой программы ДПО была проведена итеративная оптимизация архитектуры программы и оценочных средств для повышения эффективности обучения и адаптации под реальные потребности участников.</p>
+          <p>По итогам анализа пилотного потока 72-часовой программы ДПО проведена итеративная оптимизация архитектуры и оценочных средств для повышения эффективности обучения.</p>
           <div class="label">Задача</div>
           <p>Адаптировать структуру программы, сохранив учебные результаты и повысив прозрачность требований к участникам с разным уровнем подготовки.</p>
           <div class="label">Решение</div>
-          <p>• <strong>Оптимизация структуры и темпа:</strong> объединила разрозненные мини-задания в укрупнённые проектные этапы.</p>
-          <p>• <strong>Перепроектирование дифференциации (3 траектории):</strong> вместо запутанного разделения на 2 трека выстроила чёткую структуру маршрутов — 1 траектория с кодингом (Python) и 2 траектории без кода (аналитика без кода и автоматизация без кода). Участники выбирают путь под свои навыки.</p>
-          <p>• <strong>Редизайн системы оценивания:</strong> формулировка задания с двумя уровнями сложности — базовый (обязательный минимум) и продвинутый (опциональный вызов).</p>
-          <p>• <strong>Входная диагностика:</strong> чек-лист пререквизитов во вводном модуле для самостоятельной оценки готовности.</p>
+          <p>• <strong>Оптимизация структуры:</strong> объединила разрозненные мини-задания в укрупнённые проектные этапы.</p>
+          <p>• <strong>3 траектории:</strong> 1 с кодингом (Python) и 2 без кода (аналитика без кода, автоматизация без кода) — вместо запутанного разделения на 2 трека.</p>
+          <p>• <strong>Редизайн оценивания:</strong> базовый уровень (обязательный минимум) и продвинутый (опциональный вызов).</p>
+          <p>• <strong>Входная диагностика:</strong> чек-лист пререквизитов во вводном модуле.</p>
           <div class="label">Результат</div>
-          <p>Участники получили прозрачный и гибкий маршрут под свой исходный уровень. Объединение заданий, три понятные траектории и двухуровневая система оценивания снизили когнитивную нагрузку: новички фокусируются на базовых требованиях, опытные специалисты реализуют дополнительные вызовы.</p>
+          <p>Прозрачный маршрут под исходный уровень. Укрупнение заданий, три траектории и двухуровневая оценка снизили когнитивную нагрузку: новички на базовом минимуме, опытные — на дополнительных вызовах.</p>
         </div>
       </div>
 
@@ -376,20 +495,18 @@
         </div>
         <div class="case-body">
           <div class="case-tags">
-            <span>Входная диагностика компетенций</span>
-            <span>Самодиагностика</span>
-            <span>Скаффолдинг</span>
-            <span>Навигация по программе</span>
+            <span>Входная диагностика</span><span>Самодиагностика</span>
+            <span>Скаффолдинг</span><span>Навигация по программе</span>
           </div>
           <div class="label">Контекст</div>
-          <p>На старте программы часть участников испытывала трудности с выбором подходящей траектории и объективной оценкой своего уровня подготовки, что приводило к несоответствию ожиданий и реальной сложности заданий.</p>
+          <p>На старте часть участников испытывала трудности с выбором траектории и оценкой своего уровня — ожидания расходились с реальной сложностью заданий.</p>
           <div class="label">Задача</div>
           <p>Создать инструменты для самостоятельной оценки готовности к курсу и навигации по программе.</p>
           <div class="label">Решение</div>
-          <p>• <strong>Чек-лист самопроверки пререквизитов:</strong> 14 критериев готовности по 4 разделам (идея проекта, данные, результат и проверка, готовность к старту); прогресс-индикация; для каждого пункта блок «Если нет» с шаблонами; практические советы по разделам.</p>
+          <p>• <strong>Чек-лист пререквизитов:</strong> 14 критериев по 4 разделам; прогресс-индикация; блок «Если нет» с шаблонами; советы по разделам.</p>
           <p>• <strong>Навигационные рекомендации:</strong> сценарии действий по итогам самопроверки.</p>
           <div class="label">Результат</div>
-          <p>Участники получили прозрачный инструмент для самостоятельной оценки готовности до старта программы. Чек-лист помог снизить количество уточняющих вопросов на старте и заранее выявить «слабые места».</p>
+          <p>Прозрачный инструмент оценки готовности до старта. Меньше уточняющих вопросов на старте, участники заранее видят «слабые места».</p>
         </div>
       </div>
 
@@ -400,23 +517,20 @@
         </div>
         <div class="case-body">
           <div class="case-tags">
-            <span>Обучение через вызов</span>
-            <span>Проектное обучение</span>
-            <span>Критериальное оценивание</span>
-            <span>Скаффолдинг</span>
-            <span>Двухуровневые задания</span>
-            <span>Формирующее оценивание</span>
+            <span>Обучение через вызов</span><span>Проектное обучение</span>
+            <span>Критериальное оценивание</span><span>Скаффолдинг</span>
+            <span>Двухуровневые задания</span><span>Формирующее оценивание</span>
           </div>
           <div class="label">Контекст</div>
-          <p>В рамках программы ДПО каждый участник работал над собственным проектом — решал реальную задачу из своей профессиональной сферы. Потребовалась система оценивания с объективностью проверки, прозрачными ориентирами качества и поддержкой проектов разной сложности.</p>
+          <p>Каждый участник работал над своим проектом — реальной задачей из профессиональной сферы. Нужна была объективная система оценивания с прозрачными ориентирами и поддержкой проектов разной сложности.</p>
           <div class="label">Задача</div>
-          <p>Разработать рубрики оценивания для проектных заданий с чёткими критериями, которые работают для разных типов проектов и учитывают разный уровень подготовки участников.</p>
+          <p>Разработать рубрики с чёткими критериями для разных типов проектов и разного уровня подготовки.</p>
           <div class="label">Решение</div>
-          <p>• <strong>Двухуровневая система заданий:</strong> базовый уровень (обязательный минимум) и продвинутый уровень (опциональный вызов).</p>
-          <p>• <strong>Рубрики с прозрачными критериями:</strong> для каждого проектного задания прописаны ключевые направления оценивания.</p>
-          <p>• <strong>Шаблоны для скаффолдинга:</strong> структурированные формы отчётов, где участники фиксируют основные этапы задания.</p>
+          <p>• <strong>Двухуровневые задания:</strong> базовый (обязательный минимум) и продвинутый (опциональный вызов).</p>
+          <p>• <strong>Рубрики:</strong> ключевые направления оценивания для каждого проектного задания.</p>
+          <p>• <strong>Шаблоны скаффолдинга:</strong> структурированные формы отчётов по этапам задания.</p>
           <div class="label">Результат</div>
-          <p>Участники получили прозрачные ориентиры качества и возможность самостоятельно оценивать работы до сдачи. Шаблон отчёта и алгоритм выполнения снизили когнитивную нагрузку. Двухуровневая система позволила новичкам фокусироваться на базовых требованиях, а более опытным — брать дополнительные вызовы.</p>
+          <p>Прозрачные ориентиры качества и самооценка до сдачи. Шаблон отчёта снизил когнитивную нагрузку. Новички на базовом уровне, опытные — на дополнительных вызовах.</p>
         </div>
       </div>
     </section>
@@ -483,8 +597,24 @@
       </div>
     </section>
 
-    <footer>
-      Гирич Полина Ивановна · Педагогический дизайнер · 2026
+    <div class="footer-cta" id="contact">
+      <h2>Давайте создадим крутое обучение вместе!</h2>
+      <p class="sub">Открыта к проектам и вакансиям в педагогическом дизайне и методологии</p>
+      <div class="footer-btns">
+        <a class="btn-tg" href="https://t.me/PolinaG112" target="_blank" rel="noopener">Telegram</a>
+        <a class="btn-mail" href="mailto:pogi112@mail.ru">Email</a>
+        <a class="btn-pdf" href="#" id="pdfBtn" title="Добавьте ссылку на PDF позже">Скачать резюме PDF</a>
+      </div>
+      <div class="footer-contacts">
+        <a href="https://t.me/PolinaG112" target="_blank" rel="noopener">Telegram @PolinaG112</a>
+        <a href="mailto:pogi112@mail.ru">pogi112@mail.ru</a>
+        <span>+7 (918) 333-63-57</span>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <a href="#top" id="logoLink" style="color:inherit;text-decoration:none;">Гирич Полина Ивановна</a>
+      · Педагогический дизайнер · 2026
     </footer>
   </div>
 
@@ -494,19 +624,49 @@
       if (el) el.classList.toggle('open');
     }
 
+    /* Name letters + hover scatter */
+    (function () {
+      var title = document.getElementById('nameTitle');
+      var wrap = document.getElementById('nameWrap');
+      if (!title || !wrap) return;
+      var text = 'Гирич Полина Ивановна';
+      title.innerHTML = '';
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'letter';
+        span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+        title.appendChild(span);
+      }
+      var letters = title.querySelectorAll('.letter');
+      wrap.addEventListener('mouseenter', function () {
+        letters.forEach(function (letter, idx) {
+          var dx = (Math.random() - 0.5) * 28;
+          var dy = (Math.random() - 0.5) * 22;
+          var rot = (Math.random() - 0.5) * 18;
+          letter.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
+        });
+      });
+      wrap.addEventListener('mouseleave', function () {
+        letters.forEach(function (letter) {
+          letter.style.transform = '';
+        });
+      });
+      wrap.addEventListener('click', function () {
+        document.getElementById('top').scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
+
+    /* Theme */
     (function () {
       try {
         var btn = document.getElementById('themeToggle');
         if (!btn) return;
-
         var saved = null;
         try { saved = localStorage.getItem('theme'); } catch (e) {}
-
         if (saved === 'dark') {
           document.documentElement.setAttribute('data-theme', 'dark');
           btn.textContent = '\u2600\uFE0F';
         }
-
         btn.addEventListener('click', function () {
           var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
           if (isDark) {
@@ -522,19 +682,14 @@
       } catch (e) {}
     })();
 
+    /* Reveal on scroll */
     (function () {
       try {
         var sections = document.querySelectorAll('section');
-        if (!sections.length) return;
-
-        if (typeof IntersectionObserver === 'undefined') {
-          return;
-        }
-
+        if (!sections.length || typeof IntersectionObserver === 'undefined') return;
         for (var j = 0; j < sections.length; j++) {
           sections[j].classList.add('reveal-pending');
         }
-
         var observer = new IntersectionObserver(function (entries) {
           for (var i = 0; i < entries.length; i++) {
             if (entries[i].isIntersecting) {
@@ -542,16 +697,58 @@
               entries[i].target.classList.remove('reveal-pending');
             }
           }
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        for (var k = 0; k < sections.length; k++) observer.observe(sections[k]);
+      } catch (e) {}
+    })();
 
-        for (var k = 0; k < sections.length; k++) {
-          observer.observe(sections[k]);
+    /* Progress bar + back to top + active nav */
+    (function () {
+      var bar = document.getElementById('progressBar');
+      var toTop = document.getElementById('toTop');
+      var navLinks = document.querySelectorAll('.nav-links a[data-section]');
+      var sectionIds = ['about', 'experience', 'cases', 'materials', 'skills', 'education'];
+
+      function onScroll() {
+        var doc = document.documentElement;
+        var scrollTop = window.pageYOffset || doc.scrollTop;
+        var height = doc.scrollHeight - doc.clientHeight;
+        var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+        if (bar) bar.style.width = pct + '%';
+        if (toTop) {
+          if (scrollTop > 500) toTop.classList.add('show');
+          else toTop.classList.remove('show');
         }
-      } catch (e) {
-        var secs = document.querySelectorAll('section');
-        for (var k = 0; k < secs.length; k++) {
-          secs[k].classList.add('visible');
+
+        /* Active section: pick the one whose top is closest above mid-viewport */
+        var marker = scrollTop + 120;
+        var current = sectionIds[0];
+        for (var i = 0; i < sectionIds.length; i++) {
+          var el = document.getElementById(sectionIds[i]);
+          if (!el) continue;
+          if (el.offsetTop <= marker) current = sectionIds[i];
         }
+        navLinks.forEach(function (link) {
+          if (link.getAttribute('data-section') === current) link.classList.add('active');
+          else link.classList.remove('active');
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      if (toTop) {
+        toTop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      var logo = document.getElementById('logoLink');
+      if (logo) {
+        logo.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
       }
     })();
   </script>
