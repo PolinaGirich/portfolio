@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Гирич Полина — Педагогический дизайнер</title>
+  <meta name="description" content="Портфолио педагогического дизайнера: проектирование программ ДПО, дифференциация, оценочные средства, аналитика обучения." />
+  <style>
+    :root {
+      --primary: #1e293b;          /* графит */
+      --accent: #e11d48;           /* розовый основной */
+      --accent-soft: #ffe4e6;      /* мягкий розовый фон */
+      --bright: #f43f5e;           /* яркий акцент */
+      --muted: #64748b;
+      --bg: #faf7f8;
+      --card: #ffffff;
+      --line: #f1e8ea;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(30, 41, 59, 0.06);
+    }
+    [data-theme="dark"] {
+      --primary: #f1f5f9;
+      --accent: #fb7185;
+      --accent-soft: #4c0519;
+      --bright: #fda4af;
+      --muted: #94a3b8;
+      --bg: #0f1419;
+      --card: #1a222d;
+      --line: #2d3748;
+      --shadow: 0 4px 24px rgba(0,0,0,0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--primary);
+      background: var(--bg);
+      line-height: 1.6;
+      font-size: 15px;
+      transition: background 0.3s, color 0.3s;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 32px 20px 80px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      margin: -32px -20px 28px;
+      padding: 12px 20px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      align-items: center; justify-content: space-between;
+    }
+    .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--muted); font-size: 13px; font-weight: 500;
+      padding: 6px 12px; border-radius: 8px; text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); background: var(--accent-soft); }
+    .theme-btn {
+      background: var(--card); border: 1px solid var(--line);
+      color: var(--primary); width: 36px; height: 36px; border-radius: 10px;
+      cursor: pointer; font-size: 16px; display: grid; place-items: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .theme-btn:hover { border-color: var(--accent); transform: scale(1.05); }
+
+    /* Header */
+    header {
+      background: var(--card); border-radius: var(--radius);
+      padding: 36px 32px; margin-bottom: 24px;
+      box-shadow: var(--shadow); border-top: 4px solid var(--accent);
+    }
+    h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 4px; }
+    .role { color: var(--accent); font-weight: 600; font-size: 16px; margin-bottom: 6px; }
+    .sub-role { color: var(--muted); font-size: 13.5px; margin-bottom: 16px; }
+    .contacts {
+      color: var(--muted); font-size: 13.5px;
+      display: flex; flex-wrap: wrap; gap: 6px 16px;
+    }
+    .contacts a { color: var(--muted); }
+    .contacts a:hover { color: var(--accent); }
+
+    /* Sections + reveal */
+    section {
+      background: var(--card); border-radius: var(--radius);
+      padding: 28px 32px; margin-bottom: 18px;
+      box-shadow: var(--shadow);
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.55s ease, transform 0.55s ease, background 0.3s;
+    }
+    section.reveal-pending {
+      opacity: 0; transform: translateY(18px);
+    }
+    section.visible {
+      opacity: 1; transform: translateY(0);
+    }
+    h2 {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px;
+      color: var(--accent); margin-bottom: 16px; font-weight: 700;
+    }
+    h3 { font-size: 16.5px; margin-bottom: 4px; font-weight: 650; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+    p { margin-bottom: 10px; font-size: 14.5px; }
+    ul { padding-left: 18px; margin-bottom: 6px; }
+    li { margin-bottom: 7px; font-size: 14px; }
+
+    .highlight-box {
+      background: var(--accent-soft); border-radius: 12px;
+      padding: 16px 18px; margin: 14px 0 6px;
+      font-size: 14px; border-left: 3px solid var(--accent);
+    }
+
+    /* Skills with hover */
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      position: relative;
+      background: var(--accent-soft); color: var(--accent);
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 12.5px; font-weight: 550;
+      cursor: default; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .tag:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(225, 29, 72, 0.18);
+      background: var(--bright); color: #fff;
+    }
+    .tag .tip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary); color: var(--card);
+      font-size: 11.5px; font-weight: 400; line-height: 1.35;
+      padding: 8px 12px; border-radius: 8px; width: max-content; max-width: 200px;
+      z-index: 10; pointer-events: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .tag .tip::after {
+      content: ""; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent; border-top-color: var(--primary);
+    }
+    .tag:hover .tip { display: block; }
+
+    /* Cases accordion */
+    .case {
+      border: 1px solid var(--line); border-radius: 14px;
+      margin-bottom: 14px; overflow: hidden;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .case:hover { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+    .case-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 20px; cursor: pointer; gap: 12px; user-select: none;
+    }
+    .case-header h3 { margin: 0; font-size: 15.5px; flex: 1; }
+    .case-toggle {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 18px;
+      flex-shrink: 0; transition: transform 0.25s, background 0.2s;
+    }
+    .case.open .case-toggle { transform: rotate(45deg); background: var(--accent); color: #fff; }
+    .case-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      padding: 0 20px;
+    }
+    .case.open .case-body { max-height: 2200px; padding: 0 20px 20px; }
+    .case-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin: 4px 0 8px;
+    }
+    .case-tags span {
+      font-size: 11px; font-weight: 500;
+      padding: 3px 10px; border-radius: 12px;
+      background: var(--accent-soft); color: var(--accent);
+    }
+    .label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.9px; color: var(--accent); margin: 14px 0 4px;
+    }
+    .case-body p { font-size: 14px; }
+    .metrics {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px; margin: 12px 0;
+    }
+    .metric {
+      background: var(--bg); border-radius: 10px; padding: 12px 14px; text-align: center;
+    }
+    .metric strong { display: block; font-size: 18px; color: var(--accent); font-weight: 700; }
+    .metric span { font-size: 12px; color: var(--muted); }
+
+    /* Materials list (no links) */
+    .materials-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 8px; margin-top: 8px;
+    }
+    .material-item {
+      padding: 11px 14px; background: var(--bg); border-radius: 10px;
+      border: 1px solid var(--line); font-size: 13px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .material-item:hover {
+      border-color: var(--accent); transform: translateY(-2px);
+    }
+
+    .edu-item { margin-bottom: 14px; }
+    .edu-item:last-child { margin-bottom: 0; }
+
+    footer {
+      text-align: center; color: var(--muted); font-size: 12.5px;
+      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 16px 12px 60px; }
+      header, section { padding: 22px 18px; }
+      h1 { font-size: 22px; }
+      nav { margin: -16px -12px 20px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .tag .tip { max-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="nav-links">
+        <a href="#about">Обо мне</a>
+        <a href="#experience">Опыт</a>
+        <a href="#cases">Кейсы</a>
+        <a href="#materials">Материалы</a>
+        <a href="#skills">Навыки</a>
+        <a href="#education">Образование</a>
+      </div>
+      <button class="theme-btn" id="themeToggle" title="Тема">🌙</button>
+    </nav>
+
+    <header>
+      <h1>Гирич Полина Ивановна</h1>
+      <div class="role">Педагогический дизайнер / Instructional Designer</div>
+      <div class="sub-role">Также: Методист образовательных программ · Learning Experience Designer</div>
+      <div class="contacts">
+        <a href="mailto:pogi112@mail.ru">pogi112@mail.ru</a>
+        <span>+7 (918) 333-63-57</span>
+        <span>Telegram: @PolinaG112</span>
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>Обо мне</h2>
+      <p>
+        Педагогический дизайнер с опытом полного цикла проектирования программ ДПО —
+        от анализа потребностей аудитории и архитектуры дорожной карты до создания контента,
+        системы оценки, аналитики результатов и редизайна.
+      </p>
+      <p>
+        Специализируюсь на <strong>дифференцированных образовательных траекториях</strong>,
+        <strong>критериальном оценивании</strong> и превращении сложного технического
+        (ИИ, данные, R&amp;D) и бизнес-контента в понятные учебные модули.
+      </p>
+      <div class="highlight-box">
+        Работала с программами по применению ИИ в исследованиях и разработках:
+        проектировала архитектуру, дифференцированные траектории, оценочные средства,
+        интерактивные лонгриды, инструменты самодиагностики и систему поддержки наставников.
+        На основе данных запуска проводила редизайн — снижала когнитивную нагрузку
+        и оптимизировала нагрузку на экспертов.
+      </div>
+      <p style="margin-top:12px; font-size:13.5px; color:var(--muted);">
+        Методологии: обратный дизайн, таксономия Блума, Challenge-Based Learning,
+        проектное и проблемно-ориентированное обучение, формирующее оценивание, геймификация, LXD.
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2>Опыт работы</h2>
+      <div style="margin-bottom:26px;">
+        <h3>Педагогический дизайнер / Методист</h3>
+        <div class="meta">Южный федеральный университет · Февраль 2025 — настоящее время</div>
+        <ul>
+          <li>Спроектировала архитектуру программ ДПО (в т.ч. по применению ИИ в R&amp;D): дорожные карты, модули, учебные результаты.</li>
+          <li>Разработала дифференцированные траектории обучения под разный уровень компетенций слушателей.</li>
+          <li>Создала систему оценивания: шаблоны паспортов проектов по 3 направлениям + детальные рубрики с двухуровневыми критериями.</li>
+          <li>Собрала и сверстала 50+ интерактивных лонгридов (гипотезы, MVP, метрики, пилот, принятие решений в неопределённости и др.).</li>
+          <li>Разработала формы самодиагностики компетенций, чек-листы выбора траектории, карты рефлексии и трекеры для наставников.</li>
+          <li>Провела анализ запуска программ: собрала обратную связь, подготовила аналитический отчёт с рекомендациями по методологии.</li>
+          <li>На основе данных провела редизайн: укрупнила задания, снизила нагрузку на экспертов и когнитивную перегрузку участников.</li>
+          <li>Оформила интерактивную витрину проектов участников и подготовила сценарии/дизайн презентаций вебинаров (10–25+ слайдов).</li>
+        </ul>
+      </div>
+      <div style="margin-bottom:26px;">
+        <h3>Куратор / менеджер программ ДПО</h3>
+        <div class="meta">Южный федеральный университет · Апрель 2024 — январь 2025</div>
+        <ul>
+          <li>Координировала учебный процесс, экспертов и наставников, контролировала дедлайны и расписание.</li>
+          <li>Модерировала чаты, решала организационные и технические вопросы, собирала обратную связь.</li>
+          <li>Поддерживала проектную деятельность: навигация по платформе, организация защит, проверка комплектности материалов.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Стажёр методического отдела</h3>
+        <div class="meta">Changellenge · Февраль 2024 — август 2024</div>
+        <ul>
+          <li>Подготовка материалов воркшопов, аудит программ, разработка материалов курса, создание дашбордов статистики прохождения.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="cases">
+      <h2>Кейсы</h2>
+      <p style="font-size:13.5px; color:var(--muted); margin-bottom:16px;">Нажмите на кейс, чтобы раскрыть детали.</p>
+
+      <div class="case open" id="case1">
+        <div class="case-header" onclick="toggleCase('case1')">
+          <h3>1. Проектирование программы ДПО с нуля: дифференциация под разные типы задач</h3>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span>Обучение через вызов</span>
+            <span>Таксономия Блума</span>
+            <span>Дифференцированное обучение</span>
+            <span>Геймификация</span>
+          </div>
+          <div class="label">Контекст</div>
+          <p>Разработка 72-часовой программы ДПО для разнородной аудитории: инженеры и научные сотрудники с разным бэкграундом (от базового понимания данных до продвинутого уровня).</p>
+          <div class="label">Задача</div>
+          <p>Спроектировать архитектуру программы с нуля, которая не «усредняет» материал, а даёт релевантные инструменты под разные профессиональные задачи, используя проектный подход.</p>
+          <div class="label">Решение</div>
+          <p>• <strong>Архитектура на основе CBL и таксономии Блума:</strong> разбила программу на логические блоки с нарастающей сложностью — от формулировки профессионального вызова (уровни «понять/применить») до разработки прототипа и его прикладной адаптации (уровни «проанализировать/создать»).</p>
+          <p>• <strong>Дифференциация:</strong> разделила практический модуль на 2 трека в зависимости от типа данных:</p>
+          <p style="padding-left:12px;">— Технический трек: работа с сенсорными данными, временными рядами, предиктивным обслуживанием<br/>
+          — Исследовательский трек: работа с табличными, текстовыми и экспериментальными данными</p>
+          <p>• <strong>Смешанный формат и оценка:</strong> синхронные онлайн-вебинары с экспертами + асинхронная работа в LMS; прозрачная балльно-рейтинговая система с укрупнёнными проектными заданиями; элементы геймификации (бейджи за ключевые этапы, сквозной нарратив).</p>
+          <div class="label">Результат</div>
+          <p>Участники решают реальные задачи из своей практики, а не абстрактные примеры. Разделение на треки позволило избежать когнитивной перегрузки и дало релевантный инструментарий как инженерам, так и исследователям, обеспечивая параллельную работу без взаимного замедления.</p>
+        </div>
+      </div>
+
+      <div class="case" id="case2">
+        <div class="case-header" onclick="toggleCase('case2')">
+          <h3>2. Редизайн программы на основе данных обратной связи</h3>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span>Проектирование на основе данных</span>
+            <span>Управление когнитивной нагрузкой</span>
+            <span>Скаффолдинг</span>
+            <span>Входная диагностика компетенций</span>
+          </div>
+          <div class="label">Контекст</div>
+          <p>По итогам анализа пилотного потока 72-часовой программы ДПО была проведена итеративная оптимизация архитектуры программы и оценочных средств для повышения эффективности обучения и адаптации под реальные потребности участников.</p>
+          <div class="label">Задача</div>
+          <p>Адаптировать структуру программы, сохранив учебные результаты и повысив прозрачность требований к участникам с разным уровнем подготовки.</p>
+          <div class="label">Решение</div>
+          <p>• <strong>Оптимизация структуры и темпа:</strong> объединила разрозненные мини-задания в укрупнённые проектные этапы.</p>
+          <p>• <strong>Перепроектирование дифференциации (3 траектории):</strong> вместо запутанного разделения на 2 трека выстроила чёткую структуру маршрутов — 1 траектория с кодингом (Python) и 2 траектории без кода (аналитика без кода и автоматизация без кода). Участники выбирают путь под свои навыки.</p>
+          <p>• <strong>Редизайн системы оценивания:</strong> формулировка задания с двумя уровнями сложности — базовый (обязательный минимум) и продвинутый (опциональный вызов).</p>
+          <p>• <strong>Входная диагностика:</strong> чек-лист пререквизитов во вводном модуле для самостоятельной оценки готовности.</p>
+          <div class="label">Результат</div>
+          <p>Участники получили прозрачный и гибкий маршрут под свой исходный уровень. Объединение заданий, три понятные траектории и двухуровневая система оценивания снизили когнитивную нагрузку: новички фокусируются на базовых требованиях, опытные специалисты реализуют дополнительные вызовы.</p>
+        </div>
+      </div>
+
+      <div class="case" id="case3">
+        <div class="case-header" onclick="toggleCase('case3')">
+          <h3>3. Разработка навигационных инструментов для самодиагностики</h3>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span>Входная диагностика компетенций</span>
+            <span>Самодиагностика</span>
+            <span>Скаффолдинг</span>
+            <span>Навигация по программе</span>
+          </div>
+          <div class="label">Контекст</div>
+          <p>На старте программы часть участников испытывала трудности с выбором подходящей траектории и объективной оценкой своего уровня подготовки, что приводило к несоответствию ожиданий и реальной сложности заданий.</p>
+          <div class="label">Задача</div>
+          <p>Создать инструменты для самостоятельной оценки готовности к курсу и навигации по программе.</p>
+          <div class="label">Решение</div>
+          <p>• <strong>Чек-лист самопроверки пререквизитов:</strong> 14 критериев готовности по 4 разделам (идея проекта, данные, результат и проверка, готовность к старту); прогресс-индикация; для каждого пункта блок «Если нет» с шаблонами; практические советы по разделам.</p>
+          <p>• <strong>Навигационные рекомендации:</strong> сценарии действий по итогам самопроверки.</p>
+          <div class="label">Результат</div>
+          <p>Участники получили прозрачный инструмент для самостоятельной оценки готовности до старта программы. Чек-лист помог снизить количество уточняющих вопросов на старте и заранее выявить «слабые места».</p>
+        </div>
+      </div>
+
+      <div class="case" id="case4">
+        <div class="case-header" onclick="toggleCase('case4')">
+          <h3>4. Разработка рубрик оценивания проектной работы</h3>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-tags">
+            <span>Обучение через вызов</span>
+            <span>Проектное обучение</span>
+            <span>Критериальное оценивание</span>
+            <span>Скаффолдинг</span>
+            <span>Двухуровневые задания</span>
+            <span>Формирующее оценивание</span>
+          </div>
+          <div class="label">Контекст</div>
+          <p>В рамках программы ДПО каждый участник работал над собственным проектом — решал реальную задачу из своей профессиональной сферы. Потребовалась система оценивания с объективностью проверки, прозрачными ориентирами качества и поддержкой проектов разной сложности.</p>
+          <div class="label">Задача</div>
+          <p>Разработать рубрики оценивания для проектных заданий с чёткими критериями, которые работают для разных типов проектов и учитывают разный уровень подготовки участников.</p>
+          <div class="label">Решение</div>
+          <p>• <strong>Двухуровневая система заданий:</strong> базовый уровень (обязательный минимум) и продвинутый уровень (опциональный вызов).</p>
+          <p>• <strong>Рубрики с прозрачными критериями:</strong> для каждого проектного задания прописаны ключевые направления оценивания.</p>
+          <p>• <strong>Шаблоны для скаффолдинга:</strong> структурированные формы отчётов, где участники фиксируют основные этапы задания.</p>
+          <div class="label">Результат</div>
+          <p>Участники получили прозрачные ориентиры качества и возможность самостоятельно оценивать работы до сдачи. Шаблон отчёта и алгоритм выполнения снизили когнитивную нагрузку. Двухуровневая система позволила новичкам фокусироваться на базовых требованиях, а более опытным — брать дополнительные вызовы.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="materials">
+      <h2>Примеры материалов</h2>
+      <p style="font-size:13.5px; color:var(--muted); margin-bottom:12px;">
+        Темы интерактивных лонгридов и материалов, которые я разрабатывала:
+      </p>
+      <div class="materials-list">
+        <div class="material-item">От проблемы к гипотезе: как сформулировать идею проекта</div>
+        <div class="material-item">Технологическое лидерство в образовании</div>
+        <div class="material-item">Что такое MVP?</div>
+        <div class="material-item">Логика проекта: цель → действие → проверка</div>
+        <div class="material-item">Карта опыта участника</div>
+        <div class="material-item">ИИ как инструмент диагностики проекта</div>
+        <div class="material-item">Навигатор метрик: как измерить успех</div>
+        <div class="material-item">Инструменты пилотного запуска</div>
+        <div class="material-item">Принятие решений в неопределённости</div>
+        <div class="material-item">Презентации вебинаров и кейсов (10–25+ слайдов)</div>
+        <div class="material-item">Чек-листы, шаблоны, карты рефлексии</div>
+        <div class="material-item">Инструкции и трекеры для наставников</div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Ключевые навыки</h2>
+      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Наведите на навык — появится краткое пояснение</p>
+      <div class="skills">
+        <span class="tag">Педагогический дизайн<span class="tip">Полный цикл: от целей до оценки</span></span>
+        <span class="tag">Обратный дизайн<span class="tip">От результатов обучения к контенту</span></span>
+        <span class="tag">Таксономия Блума<span class="tip">Уровни когнитивных целей</span></span>
+        <span class="tag">Дифференцированное обучение<span class="tip">Траектории под разный уровень</span></span>
+        <span class="tag">Критериальное оценивание<span class="tip">Рубрики и дескрипторы</span></span>
+        <span class="tag">Challenge-Based Learning<span class="tip">Обучение через реальный вызов</span></span>
+        <span class="tag">Проектное обучение<span class="tip">От задачи к результату</span></span>
+        <span class="tag">Геймификация<span class="tip">Бейджи, нарратив, прогресс</span></span>
+        <span class="tag">Дистанционное обучение<span class="tip">Онлайн-форматы и асинхронная работа</span></span>
+        <span class="tag">Организация учебного процесса<span class="tip">Координация, дедлайны, расписание</span></span>
+        <span class="tag">iSpring Cloud<span class="tip">Интерактивные лонгриды</span></span>
+        <span class="tag">Аналитика обучения<span class="tip">Обратная связь и данные запуска</span></span>
+        <span class="tag">Редизайн по данным<span class="tip">Улучшение программ после запуска</span></span>
+        <span class="tag">MS Excel<span class="tip">Трекеры, таблицы, дашборды</span></span>
+        <span class="tag">MS PowerPoint<span class="tip">Презентации и сценарии вебинаров</span></span>
+        <span class="tag">Разработка регламентов<span class="tip">Инструкции и чек-листы</span></span>
+        <span class="tag">Деловая коммуникация<span class="tip">Переписка, модерация, сопровождение</span></span>
+        <span class="tag">Сопровождение<span class="tip">Участники, наставники, эксперты</span></span>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Образование</h2>
+      <div class="edu-item">
+        <h3>2025 — Магистр</h3>
+        <div class="meta">Южный федеральный университет · Педагогический дизайн и анализ образовательных данных</div>
+      </div>
+      <div class="edu-item">
+        <h3>2022 — Бакалавр</h3>
+        <div class="meta">РИНХ · Мировая экономика и международные экономические отношения</div>
+      </div>
+      <div class="edu-item">
+        <h3>2024 — Повышение квалификации</h3>
+        <div class="meta">ЮФУ · Искусственный интеллект в образовании и науке</div>
+      </div>
+    </section>
+
+    <footer>
+      Гирич Полина Ивановна · Педагогический дизайнер · 2026
+    </footer>
+  </div>
+
+  <script>
+    function toggleCase(id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.toggle('open');
+    }
+
+    (function () {
+      try {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
+
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          btn.textContent = '\u2600\uFE0F';
+        }
+
+        btn.addEventListener('click', function () {
+          var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            try { localStorage.setItem('theme', 'light'); } catch (e) {}
+            btn.textContent = '\uD83C\uDF19';
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+            btn.textContent = '\u2600\uFE0F';
+          }
+        });
+      } catch (e) {}
+    })();
+
+    (function () {
+      try {
+        var sections = document.querySelectorAll('section');
+        if (!sections.length) return;
+
+        if (typeof IntersectionObserver === 'undefined') {
+          return;
+        }
+
+        for (var j = 0; j < sections.length; j++) {
+          sections[j].classList.add('reveal-pending');
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting) {
+              entries[i].target.classList.add('visible');
+              entries[i].target.classList.remove('reveal-pending');
+            }
+          }
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        for (var k = 0; k < sections.length; k++) {
+          observer.observe(sections[k]);
+        }
+      } catch (e) {
+        var secs = document.querySelectorAll('section');
+        for (var k = 0; k < secs.length; k++) {
+          secs[k].classList.add('visible');
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
