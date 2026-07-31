@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-site-verification" content="XKyyVbF_z8xCF5KZew_iNsGQejAGHqS30IGSDrQckeM" />
   <title>Гирич Полина — Педагогический дизайнер</title>
   <meta name="description" content="Портфолио педагогического дизайнера Полины Гирич: проектирование программ ДПО, дифференциация, оценочные средства, аналитика обучения." />
   <style>
@@ -335,6 +334,195 @@
       .footer-btns { flex-direction: column; align-items: stretch; }
       .footer-btns a { justify-content: center; }
     }
+
+    /* Approach */
+    .approach-intro {
+      font-size: 14.5px; margin-bottom: 18px; color: var(--primary);
+    }
+    .approach-steps {
+      display: grid; gap: 8px;
+    }
+    .approach-step {
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px 14px; cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--bg);
+    }
+    .approach-step:hover,
+    .approach-step.open {
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+      background: var(--card);
+    }
+    .approach-step-head {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; font-size: 14px;
+    }
+    .approach-num {
+      width: 24px; height: 24px; border-radius: 8px;
+      background: var(--accent-soft); color: var(--accent);
+      display: grid; place-items: center; font-size: 12px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .approach-step.open .approach-num {
+      background: var(--accent); color: #fff;
+    }
+    .approach-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease, margin 0.2s;
+      font-size: 13.5px; color: var(--muted); line-height: 1.5;
+    }
+    .approach-step.open .approach-body {
+      max-height: 120px; margin-top: 8px;
+    }
+
+    /* Skills landscape */
+    .map-hint {
+      font-size: 13px; color: var(--muted); margin-bottom: 14px;
+    }
+    .skill-plains {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-bottom: 16px;
+    }
+    .plain {
+      position: relative;
+      border: 1px solid var(--line); border-radius: 14px;
+      padding: 14px 16px; background: var(--bg);
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .plain:hover {
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .plain h3 {
+      font-size: 14px; margin: 0 0 4px; font-weight: 650;
+    }
+    .plain .plain-sub {
+      font-size: 12px; color: var(--muted); line-height: 1.4;
+    }
+    .plain .plain-list {
+      display: none; margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: 12.5px; color: var(--primary); line-height: 1.55;
+    }
+    .plain:hover .plain-list,
+    .plain:focus-within .plain-list {
+      display: block;
+    }
+    .plain-list li { margin-bottom: 3px; margin-left: 14px; }
+
+    .peaks-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.9px; color: var(--accent); margin: 4px 0 10px;
+    }
+    .skill-peaks {
+      display: grid; grid-template-columns: 1fr;
+      gap: 8px; margin-bottom: 16px;
+    }
+    .peak {
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px 14px; background: var(--card);
+      cursor: pointer; text-align: left; width: 100%;
+      font: inherit; color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .peak:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.12);
+    }
+    .peak-title {
+      font-weight: 650; font-size: 13.5px; margin-bottom: 2px;
+    }
+    .peak-desc {
+      font-size: 12.5px; color: var(--muted); line-height: 1.4;
+    }
+    .peak-more {
+      font-size: 11.5px; color: var(--accent); margin-top: 6px; font-weight: 600;
+    }
+
+    .skills-tags-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.9px; color: var(--muted); margin: 8px 0 10px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(15, 20, 25, 0.45);
+      z-index: 200; display: none; align-items: center; justify-content: center;
+      padding: 20px; backdrop-filter: blur(4px);
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--card); color: var(--primary);
+      border-radius: 16px; max-width: 420px; width: 100%;
+      padding: 22px 22px 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+      border-top: 4px solid var(--accent);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal h3 { font-size: 16px; margin-bottom: 8px; }
+    .modal p { font-size: 14px; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+    .modal-close {
+      background: var(--accent-soft); color: var(--accent); border: none;
+      padding: 8px 14px; border-radius: 10px; font-weight: 600;
+      cursor: pointer; font-size: 13px;
+    }
+    .modal-close:hover { background: var(--accent); color: #fff; }
+
+    /* Achievement */
+    #routeToast {
+      position: fixed; right: 20px; bottom: 80px; z-index: 90;
+      max-width: 300px; padding: 14px 16px;
+      background: var(--card); color: var(--primary);
+      border-radius: 14px; border: 1px solid var(--line);
+      box-shadow: 0 8px 28px rgba(30, 41, 59, 0.14);
+      border-left: 4px solid var(--accent);
+      font-size: 13.5px; line-height: 1.4;
+      opacity: 0; transform: translateY(16px);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    #routeToast.show {
+      opacity: 1; transform: translateY(0);
+      pointer-events: auto;
+    }
+    #routeMedal {
+      position: fixed; right: 20px; bottom: 24px; z-index: 70;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--card); border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display: none; align-items: center; justify-content: center;
+      font-size: 16px; cursor: default;
+      line-height: 1;
+    }
+    #routeMedal.show { display: flex; }
+    #routeMedal .medal-tip {
+      display: none; position: absolute; right: 0; bottom: calc(100% + 8px);
+      background: var(--primary); color: var(--card);
+      font-size: 11.5px; padding: 8px 10px; border-radius: 8px;
+      white-space: nowrap; max-width: 240px; white-space: normal;
+      width: max-content; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    #routeMedal:hover .medal-tip { display: block; }
+
+    @media (max-width: 600px) {
+      .skill-plains { grid-template-columns: 1fr; }
+      .plain:hover .plain-list { display: block; }
+      .plain .plain-list { display: block; } /* always visible on mobile */
+      .plain:hover { transform: none; }
+      #routeToast {
+        right: 12px; left: 12px; bottom: 72px; max-width: none;
+        font-size: 13px; padding: 12px 14px;
+      }
+      #routeMedal { right: 12px; bottom: 16px; }
+      /* keep toTop from overlapping medal */
+      #toTop { right: 12px; bottom: 56px; }
+    }
   </style>
 </head>
 <body>
@@ -350,6 +538,7 @@
         <a href="#materials" data-section="materials">Материалы</a>
         <a href="#skills" data-section="skills">Навыки</a>
         <a href="#education" data-section="education">Образование</a>
+        <a href="#approach" data-section="approach">Как я работаю</a>
       </div>
       <button class="theme-btn" id="themeToggle" title="Тема">🌙</button>
     </nav>
@@ -437,7 +626,7 @@
     </section>
 
     <section id="cases">
-      <h2>Над чем я работала </h2>
+      <h2>Кейсы</h2>
       <p style="font-size:13.5px; color:var(--muted); margin-bottom:14px;">Нажмите на кейс, чтобы раскрыть детали.</p>
 
       <div class="case open" id="case1">
@@ -481,7 +670,7 @@
           <p>Адаптировать структуру программы, сохранив учебные результаты и повысив прозрачность требований к участникам с разным уровнем подготовки.</p>
           <div class="label">Решение</div>
           <p>• <strong>Оптимизация структуры:</strong> объединила разрозненные мини-задания в укрупнённые проектные этапы.</p>
-          <p>• <strong>3 траектории:</strong> 1 с кодингом (Python) и 2 без кода (аналитика без кода, автоматизация без кода) — вместо разделения на 2 трека.</p>
+          <p>• <strong>3 траектории:</strong> 1 с кодингом (Python) и 2 без кода (аналитика без кода, автоматизация без кода) — вместо запутанного разделения на 2 трека.</p>
           <p>• <strong>Редизайн оценивания:</strong> базовый уровень (обязательный минимум) и продвинутый (опциональный вызов).</p>
           <p>• <strong>Входная диагностика:</strong> чек-лист пререквизитов во вводном модуле.</p>
           <div class="label">Результат</div>
@@ -558,15 +747,83 @@
     </section>
 
     <section id="skills">
-      <h2>Ключевые навыки</h2>
-      <p style="font-size:13px; color:var(--muted); margin-bottom:12px;">Наведите на навык — появится краткое пояснение</p>
+      <h2>Навыки</h2>
+      <p class="map-hint">Широкие области — наведите (на телефоне открыты сразу). Примеры глубокой проработки — нажмите, чтобы раскрыть.</p>
+
+      <div class="skill-plains">
+        <div class="plain" tabindex="0">
+          <h3>Проектирование обучения</h3>
+          <div class="plain-sub">Каркас программ и учебные результаты</div>
+          <ul class="plain-list">
+            <li>Цели и результаты обучения</li>
+            <li>Структура модулей и траектории</li>
+            <li>Обратное проектирование</li>
+            <li>Таксономия Блума</li>
+            <li>Обучение через вызов и проектный формат</li>
+          </ul>
+        </div>
+        <div class="plain" tabindex="0">
+          <h3>Материалы и форматы</h3>
+          <div class="plain-sub">От идеи до готовых опор для участников</div>
+          <ul class="plain-list">
+            <li>Интерактивные лонгриды</li>
+            <li>Сценарии занятий и вебинаров</li>
+            <li>Презентации</li>
+            <li>Чек-листы и шаблоны</li>
+            <li>Инструкции и регламенты</li>
+          </ul>
+        </div>
+        <div class="plain" tabindex="0">
+          <h3>Оценивание и поддержка</h3>
+          <div class="plain-sub">Прозрачные критерии и сопровождение</div>
+          <ul class="plain-list">
+            <li>Рубрики и критериальная оценка</li>
+            <li>Уровни сложности заданий</li>
+            <li>Самодиагностика</li>
+            <li>Сопровождение участников</li>
+            <li>Поддержка наставников и экспертов</li>
+          </ul>
+        </div>
+        <div class="plain" tabindex="0">
+          <h3>Запуск и улучшение</h3>
+          <div class="plain-sub">От старта программы до доработки</div>
+          <ul class="plain-list">
+            <li>Сбор обратной связи</li>
+            <li>Анализ прохождения</li>
+            <li>Доработка по данным</li>
+            <li>Снижение перегрузки</li>
+            <li>Координация учебного процесса</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="peaks-label">Примеры глубокой проработки</div>
+      <div class="skill-peaks">
+        <button type="button" class="peak" data-peak="diff">
+          <div class="peak-title">Разные маршруты в одной программе</div>
+          <div class="peak-desc">Для участников с разным опытом — свои траектории и уровень сложности</div>
+          <div class="peak-more">Подробнее →</div>
+        </button>
+        <button type="button" class="peak" data-peak="redi">
+          <div class="peak-title">Доработка после запуска</div>
+          <div class="peak-desc">Улучшаю программу по обратной связи и данным, а не «раз и навсегда»</div>
+          <div class="peak-more">Подробнее →</div>
+        </button>
+        <button type="button" class="peak" data-peak="complex">
+          <div class="peak-title">Сложный контент → понятные модули</div>
+          <div class="peak-desc">Упаковываю технически и предметно сложные темы в рабочие учебные шаги</div>
+          <div class="peak-more">Подробнее →</div>
+        </button>
+      </div>
+
+      <div class="skills-tags-label">Инструменты и форматы</div>
       <div class="skills">
         <span class="tag">Педагогический дизайн<span class="tip">Полный цикл: от целей до оценки</span></span>
         <span class="tag">Обратный дизайн<span class="tip">От результатов обучения к контенту</span></span>
         <span class="tag">Таксономия Блума<span class="tip">Уровни когнитивных целей</span></span>
         <span class="tag">Дифференцированное обучение<span class="tip">Траектории под разный уровень</span></span>
         <span class="tag">Критериальное оценивание<span class="tip">Рубрики и дескрипторы</span></span>
-        <span class="tag">Challenge-Based Learning<span class="tip">Обучение через реальный вызов</span></span>
+        <span class="tag">Обучение через вызов<span class="tip">Реальная задача как основа обучения</span></span>
         <span class="tag">Проектное обучение<span class="tip">От задачи к результату</span></span>
         <span class="tag">Геймификация<span class="tip">Бейджи, нарратив, прогресс</span></span>
         <span class="tag">Дистанционное обучение<span class="tip">Онлайн-форматы и асинхронная работа</span></span>
@@ -598,6 +855,37 @@
       </div>
     </section>
 
+
+    <section id="approach">
+      <h2>Как я работаю</h2>
+      <p class="approach-intro">
+        Проектирую обучение так, чтобы оно решало рабочую задачу:
+        от понимания аудитории до запуска, обратной связи и доработки.
+      </p>
+      <div class="approach-steps">
+        <div class="approach-step open" onclick="this.classList.toggle('open')">
+          <div class="approach-step-head"><span class="approach-num">1</span> Разбираю задачу</div>
+          <div class="approach-body">Для кого обучение, какая цель, какие ограничения по времени и уровню участников.</div>
+        </div>
+        <div class="approach-step" onclick="this.classList.toggle('open')">
+          <div class="approach-step-head"><span class="approach-num">2</span> Собираю каркас</div>
+          <div class="approach-body">Модули, результаты обучения, траектории под разный опыт участников.</div>
+        </div>
+        <div class="approach-step" onclick="this.classList.toggle('open')">
+          <div class="approach-step-head"><span class="approach-num">3</span> Наполняю практику</div>
+          <div class="approach-body">Задания, материалы и опоры для самостоятельной работы.</div>
+        </div>
+        <div class="approach-step" onclick="this.classList.toggle('open')">
+          <div class="approach-step-head"><span class="approach-num">4</span> Делаю оценку прозрачной</div>
+          <div class="approach-body">Понятные критерии, уровни сложности, форматы обратной связи.</div>
+        </div>
+        <div class="approach-step" onclick="this.classList.toggle('open')">
+          <div class="approach-step-head"><span class="approach-num">5</span> Смотрю на запуск и усиливаю</div>
+          <div class="approach-body">Собираю отклики и данные, упрощаю перегруженное, усиливаю то, что работает.</div>
+        </div>
+      </div>
+    </section>
+
     <div class="footer-cta" id="contact">
       <h2>Давайте создадим крутое обучение вместе!</h2>
       <p class="sub">Открыта к проектам и вакансиям в педагогическом дизайне и методологии</p>
@@ -612,6 +900,21 @@
       <a href="#top" id="logoLink" style="color:inherit;text-decoration:none;">Гирич Полина Ивановна</a>
       · Педагогический дизайнер · 2026
     </footer>
+  </div>
+
+
+  <div class="modal-overlay" id="peakModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3 id="peakModalTitle"></h3>
+      <p id="peakModalText"></p>
+      <button type="button" class="modal-close" id="peakModalClose">Закрыть</button>
+    </div>
+  </div>
+
+  <div id="routeToast" role="status" aria-live="polite"></div>
+  <div id="routeMedal" title="">
+    🏆
+    <span class="medal-tip">Награда «Полный маршрут»: все разделы просмотрены</span>
   </div>
 
   <script>
@@ -703,7 +1006,7 @@
       var bar = document.getElementById('progressBar');
       var toTop = document.getElementById('toTop');
       var navLinks = document.querySelectorAll('.nav-links a[data-section]');
-      var sectionIds = ['about', 'experience', 'cases', 'materials', 'skills', 'education'];
+      var sectionIds = ['about', 'experience', 'cases', 'materials', 'skills', 'education', 'approach'];
 
       function onScroll() {
         var doc = document.documentElement;
@@ -746,6 +1049,128 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
       }
+    })();
+
+    /* Peak modal */
+    (function () {
+      var data = {
+        diff: {
+          title: 'Разные маршруты в одной программе',
+          text: 'Когда аудитория неоднородна, не усредняю материал: закладываю несколько траекторий и уровни сложности, чтобы новички и более опытные участники шли по своим маршрутам без взаимного замедления.'
+        },
+        redi: {
+          title: 'Доработка после запуска',
+          text: 'После старта собираю обратную связь и смотрю, где возникает перегрузка или путаница. По этим данным укрупняю задания, уточняю требования и упрощаю то, что мешает дойти до результата.'
+        },
+        complex: {
+          title: 'Сложный контент → понятные модули',
+          text: 'Беру предметно или технически сложную тему и раскладываю её на понятные учебные шаги: от входа и опор до практики и критериев качества — так, чтобы участник мог применить это в своей работе.'
+        }
+      };
+      var overlay = document.getElementById('peakModal');
+      var title = document.getElementById('peakModalTitle');
+      var body = document.getElementById('peakModalText');
+      var closeBtn = document.getElementById('peakModalClose');
+      if (!overlay) return;
+
+      function openPeak(key) {
+        var item = data[key];
+        if (!item) return;
+        title.textContent = item.title;
+        body.textContent = item.text;
+        overlay.classList.add('show');
+      }
+      function closePeak() {
+        overlay.classList.remove('show');
+      }
+
+      document.querySelectorAll('.peak[data-peak]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          openPeak(btn.getAttribute('data-peak'));
+        });
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closePeak);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closePeak();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closePeak();
+      });
+    })();
+
+    /* Full route reward */
+    (function () {
+      try {
+        var ids = ['about', 'experience', 'cases', 'materials', 'skills', 'education'];
+        var key = 'portfolio_full_route';
+        var toast = document.getElementById('routeToast');
+        var medal = document.getElementById('routeMedal');
+        if (!toast || !medal) return;
+
+        var visited = {};
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw) visited = JSON.parse(raw) || {};
+        } catch (e) { visited = {}; }
+
+        function allDone() {
+          for (var i = 0; i < ids.length; i++) {
+            if (!visited[ids[i]]) return false;
+          }
+          return true;
+        }
+
+        function persist() {
+          try { localStorage.setItem(key, JSON.stringify(visited)); } catch (e) {}
+        }
+
+        function showMedal() {
+          medal.classList.add('show');
+        }
+
+        function showToastOnce() {
+          if (visited.__toasted) {
+            showMedal();
+            return;
+          }
+          toast.textContent = '🏆 Награда «Полный маршрут» — вы просмотрели все разделы портфолио';
+          toast.classList.add('show');
+          visited.__toasted = true;
+          persist();
+          setTimeout(function () {
+            toast.classList.remove('show');
+            showMedal();
+          }, 5000);
+        }
+
+        if (allDone()) {
+          showMedal();
+        }
+
+        if (typeof IntersectionObserver === 'undefined') return;
+
+        var obs = new IntersectionObserver(function (entries) {
+          var changed = false;
+          for (var i = 0; i < entries.length; i++) {
+            if (!entries[i].isIntersecting) continue;
+            var id = entries[i].target.id;
+            if (ids.indexOf(id) === -1) continue;
+            if (!visited[id]) {
+              visited[id] = true;
+              changed = true;
+            }
+          }
+          if (changed) {
+            persist();
+            if (allDone()) showToastOnce();
+          }
+        }, { threshold: 0.35 });
+
+        for (var j = 0; j < ids.length; j++) {
+          var el = document.getElementById(ids[j]);
+          if (el) obs.observe(el);
+        }
+      } catch (e) {}
     })();
   </script>
 </body>
